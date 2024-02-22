@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 export const metadata = {
-  title: "Add Product - Marcatplace",
+  title: "Add Product - Marketplace",
 };
 
 const addProduct = async (formData: FormData) => {
@@ -62,9 +62,7 @@ const AddProductPage = () => {
           placeholder="Price"
           name="price"
         />
-        <FormSubmitButton className="btn-block">
-          Add Product
-        </FormSubmitButton>
+        <FormSubmitButton className="btn-block">Add Product</FormSubmitButton>
       </form>
     </div>
   );
