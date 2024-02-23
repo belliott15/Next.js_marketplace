@@ -22,7 +22,7 @@ const config: Config = {
           error: "#ba1c2d",
           body: {
             //this way to add a dark theme with different background color
-            "background-color": "#e3e6e6",
+            "background-color": "#546969",
           },
         },
       },
