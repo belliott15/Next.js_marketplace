@@ -45,7 +45,9 @@ const AddToCartButton = ({
       {isPending && (
         <span className="loading loading-spinner loading-md"></span>
       )}
-      {success && !isPending && <span className="text-success">Added to Cart.</span>}
+      {success && !isPending && (
+        <span className="text-success">Added to Cart.</span>
+      )}
     </div>
   );
 };

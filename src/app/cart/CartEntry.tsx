@@ -4,12 +4,20 @@ import { CartItemWithProduct } from "@/lib/db/cart";
 import { formatPrice } from "@/lib/format";
 import Image from "next/image";
 import Link from "next/link";
+import { useTransition } from "react";
 
 interface CartEntryProps {
   cartItem: CartItemWithProduct;
+  setProductQuantity: (productId: string, quantity: number) => Promise<void>;
 }
 
-const CartEntry = ({ cartItem: { product, quantity } }: CartEntryProps) => {
+const CartEntry = ({
+  cartItem: { product, quantity },
+  setProductQuantity,
+}: CartEntryProps) => {
+  const [isPending, startTransition] = useTransition();
+
+  //build an array that holds numbers 1 - 99
   const quantityOptions: JSX.Element[] = [];
   for (let i = 1; i <= 99; i++) {
     quantityOptions.push(
@@ -37,19 +45,23 @@ const CartEntry = ({ cartItem: { product, quantity } }: CartEntryProps) => {
           <div className="my-1 flex items-center gap-2">
             Quantity:
             <select
-              className="select select-bordered w-full max-w-[80px] overflow-hidden"
+              className="select select-bordered w-full max-w-[80px]"
               defaultValue={quantity}
               onChange={(e) => {
-                e;
+                const newQuantity = parseInt(e.currentTarget.value);
+                startTransition(async () => {
+                  await setProductQuantity(product.id, newQuantity);
+                });
               }}
             >
               {quantityOptions}
             </select>
           </div>
-          <p className="flex items-center gap-3">
-            Total: {formatPrice(product.price * quantity)}{" "}
-          </p>
+          <div className="flex items-center gap-3">
+            Total: {formatPrice(product.price * quantity)}
+          </div>
         </div>
+        {isPending && <span className="loading loading-spinner loading-sm" />}
       </div>
       <div className="divider" />
     </div>
