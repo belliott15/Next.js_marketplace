@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { number } from "zod";
 
 interface PaginationBarProps {
   currentPage: number; 
