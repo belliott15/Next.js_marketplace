@@ -1,3 +1,4 @@
+import PaginationBar from "@/components/PaginationBar";
 import ProductCard from "@/components/ProductCard";
 import { prisma } from "@/lib/db/prisma";
 import Image from "next/image";
@@ -8,7 +9,7 @@ export default async function Home() {
     orderBy: { id: "desc" },
   });
   return (
-    <div>
+    <div className="flex flex-col items-center">
       {/* hero div to display most recently added product */}
       <div className="hero rounded-xl bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
@@ -38,6 +39,8 @@ export default async function Home() {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+
+      <PaginationBar currentPage={13} totalPages={99} />
     </div>
   );
 }

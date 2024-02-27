@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import AddToCartButton from "./AddToCartButton";
 import { incrementQuantity } from "./Actions";
+import { Metadata } from "next";
 
 interface ProductPageProps {
   params: {
@@ -24,11 +25,12 @@ export async function generateMetadata({
   params: { id },
 }: ProductPageProps): Promise<Metadata> {
   const product = await getProduct(id);
+
   return {
     title: product.name + " - Fern & Frond",
     description: product.description,
     openGraph: {
-      images: [{ _url: product.imageUrl }],
+      images: [{ url: product.imageUrl }],
     },
   };
 }

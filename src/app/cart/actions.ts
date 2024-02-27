@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function setProductQuantity(productId: string, quantity: number) {
   const cart = (await getCart()) ?? (await createCart());
 
-  const itemInCart = cart.items.find((item) => item.productId === productId);
+  const itemInCart = cart?.items.find((item) => item.productId === productId);
 
   if (quantity === 0) {
     if (itemInCart) {
@@ -24,6 +24,7 @@ export async function setProductQuantity(productId: string, quantity: number) {
     } else {
       await prisma.cartItem.create({
         data: {
+          //@ts-ignore
           cartId: cart.id,
           productId,
           quantity,
