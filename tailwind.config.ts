@@ -29,5 +29,12 @@ const config: Config = {
     ],
   },
   plugins: [require("daisyui")],
+  theme: {
+    extend: {
+      fontFamily: {
+        'sans': ['Helvetica', 'Arial', 'sans-serif']
+      }
+    }
+  }
 };
 export default config;
