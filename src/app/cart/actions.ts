@@ -7,28 +7,46 @@ import { revalidatePath } from "next/cache";
 export async function setProductQuantity(productId: string, quantity: number) {
   const cart = (await getCart()) ?? (await createCart());
 
-  const itemInCart = cart.items.find((item) => item.productId === productId);
+  const itemInCart = cart?.items.find((item) => item.productId === productId);
 
   if (quantity === 0) {
     if (itemInCart) {
-      await prisma.cartItem.delete({
-        where: { id: itemInCart.id },
-      });
+      await prisma.cart.update({
+        where: { id: cart.id }, 
+        data: {
+          items: {
+            delete: {
+              id: itemInCart.id
+            }
+          }
+        }
+      })
+      
     }
   } else {
     if (itemInCart) {
-      await prisma.cartItem.update({
-        where: { id: itemInCart.id },
-        data: { quantity },
-      });
-    } else {
-      await prisma.cartItem.create({
+      await prisma.cart.update({
+        where: {id: cart.id}, 
         data: {
-          cartId: cart.id,
-          productId,
-          quantity,
-        },
-      });
+          items: {
+            update: {
+              where: {id: itemInCart.id}, 
+              data: {quantity}
+            }
+          }
+        }
+      })
+
+    } else {
+      await prisma.cart.update({
+        where: {id: cart.id}, 
+        data: {
+          items: {create: { 
+            productId, 
+            quantity
+          }}
+        }
+      })
     }
   }
 

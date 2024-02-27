@@ -3,8 +3,7 @@ import { prisma } from "@/lib/db/prisma";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import React from "react";
-import { authOption } from "../api/auth/[...nextauth]/route";
-
+import { authOption } from "../api/auth/[...nextauth]/options";
 export const metadata = {
   title: "Add Product - Marketplace",
 };
@@ -25,6 +24,13 @@ const addProduct = async (formData: FormData) => {
   if (!name || !description || !imageUrl || !price) {
     throw Error("Missing required fields");
   }
+  //used for loop to get a lot of data in data base to practice
+  //pagination
+  // for(let i =0; i< 50; i++){
+  //   await prisma.product.create({
+  //     data: {name, description, imageUrl, price}, 
+  //   })
+  // }
 
   await prisma.product.create({
     data: {

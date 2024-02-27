@@ -3,13 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer";
-import SessionProvider from "./SessionProvder";
+import SessionProvider from "./SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Marketplace",
-  description: "Lets have fun with products",
+  title: "Fern & Frond",
+  description: "Making the world a little greener",
 };
 
 export default function RootLayout({
