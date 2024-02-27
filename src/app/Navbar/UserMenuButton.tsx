@@ -52,6 +52,13 @@ const UserMenuButton = ({ session }: UserMenuButtonProps) => {
             <button onClick={() => signIn()}>Sign In</button>
           )}
         </li>
+        {user && (
+          <li>
+            <a href="/add-product">Add-Product</a>
+          </li>
+        )
+        }
+        
       </ul>
     </div>
   );
