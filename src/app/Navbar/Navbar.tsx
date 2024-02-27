@@ -11,11 +11,13 @@ import { authOption } from "../api/auth/[...nextauth]/options";
 async function searchProducts(formData: FormData) {
   "use server";
 
-  const searchQuery = formData.get("searchQuery")?.toString();
+  let searchQuery = formData.get("searchQuery")?.toString();
 
   if (searchQuery) {
     redirect(`/search?query=${searchQuery}`);
   }
+
+  
 }
 
 export default async function Navbar() {
