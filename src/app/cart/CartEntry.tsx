@@ -54,14 +54,17 @@ const CartEntry = ({
                 });
               }}
             >
+              <option value={0}>Remove</option>
               {quantityOptions}
             </select>
           </div>
           <div className="flex items-center gap-3">
             Total: {formatPrice(product.price * quantity)}
+            {isPending && (
+              <span className="loading loading-spinner loading-sm" />
+            )}
           </div>
         </div>
-        {isPending && <span className="loading loading-spinner loading-sm" />}
       </div>
       <div className="divider" />
     </div>
